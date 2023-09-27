@@ -15,11 +15,6 @@ jobs:
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
       with:
         fallback: 1.0.0
-    - name: Parse semver string
-      id: semver 
-      uses: booxmedialtd/ws-action-parse-semver@v1
-      with:
-        input_string: ${{ steps.latest_tag.outputs.tag }}
     - uses: rickstaa/action-get-semver@v1
       id: semver
       with:
