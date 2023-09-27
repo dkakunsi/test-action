@@ -15,25 +15,9 @@ jobs:
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
       with:
         fallback: 1.0.0
-    - name: Bump Major
-      id: next_version
-      uses: dshare-inc/actions-semver@1.0.3
+    - uses: apexskier/github-semver-parse@v1
+      id: semver
       with:
         version: ${{ steps.latest_tag.outputs.tag }}
-        return_with_prefix: true
-        return_with_suffix: true 
-        method: minor
-    - name: Get Timestamp
-      id: timestamp
-      uses: nanzm/get-time-action@master
-      with:
-        timeZone: UTC+8
-        format: 'YYYYMMDDHHmm'
-    - name: Create Version
-      id: version
-      uses: cloudposse/github-action-string-transformer@main
-      with:
-        operation: 'uppercase'
-        input-string: ${{ steps.next_version.outputs.version }}.${{ steps.timestamp.outputs.time }}-SNAPSHOT
     - name: Get the output
-      run: echo "The output was ${{ steps.version.outputs.output-string }}"
+      run: echo "The output was ${{ steps.semver.outputs.minor }}"
