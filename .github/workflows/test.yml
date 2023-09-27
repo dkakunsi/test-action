@@ -1,0 +1,37 @@
+name: Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Get Tagged Version
+      id: latest_tag
+      uses: "WyriHaximus/github-action-get-previous-tag@v1"
+      with:
+        fallback: 1.0.0
+    - name: Get next minor version
+      id: next_version
+      uses: "WyriHaximus/github-action-next-semvers@v1"
+      with:
+        version: ${{ steps.latest_tag.outputs.tag }}
+        strict: 'false'
+    - name: Get Timestamp
+      id: timestamp
+      uses: nanzm/get-time-action@master
+      with:
+        timeZone: UTC+8
+        format: 'YYYYMMDDHHmm'
+    - name: Create Version
+      id: version
+      uses: cloudposse/github-action-string-transformer@main
+      with:
+        operation: 'uppercase'
+        input-string: ${{ steps.next_version.outputs.minor }}.${{ steps.timestamp.outputs.time }}-SNAPSHOT
+    - name: Get the output
+      run: echo "The output was ${{ steps.version.outputs.output-string }}"
