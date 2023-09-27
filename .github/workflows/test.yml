@@ -19,7 +19,7 @@ jobs:
       id: next_version
       uses: dshare-inc/actions-semver@1.0.3
       with:
-        version: ${{ env.VER }}
+        version: ${{ steps.latest_tag.outputs.tag }}
         return_with_prefix: true
         return_with_suffix: true 
         method: minor
