@@ -15,9 +15,16 @@ jobs:
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
       with:
         fallback: 1.0.0
-    - uses: apexskier/github-semver-parse@v1
-      id: semver
+    - name: Parse semver string
+      id: semver 
+      uses: booxmedialtd/ws-action-parse-semver@v1
       with:
-        version: ${{ steps.latest_tag.outputs.tag }}
-    - name: Get the output
-      run: echo "The output was ${{ steps.semver.outputs.minor }}"
+        input_string: ${{ steps.latest_tag.outputs.tag }}
+    - name: Use parsed semver
+      run: |
+          echo "v${{ steps.semver_parser.outputs.major }}"
+          echo "v${{ steps.semver_parser.outputs.minor }}"
+          echo "v${{ steps.semver_parser.outputs.patch }}"
+          echo "v${{ steps.semver_parser.outputs.prerelease }}"
+          echo "v${{ steps.semver_parser.outputs.build }}"
+          echo "v${{ steps.semver_parser.outputs.fullversion }}"
