@@ -20,11 +20,11 @@ jobs:
       uses: booxmedialtd/ws-action-parse-semver@v1
       with:
         input_string: ${{ steps.latest_tag.outputs.tag }}
-    - name: Use parsed semver
+    - uses: rickstaa/action-get-semver@v1
+      id: semver
+      with:
+        bump_level: "minor"
+    - name: Print current and next version
       run: |
-          echo "v${{ steps.semver_parser.outputs.major }}"
-          echo "v${{ steps.semver_parser.outputs.minor }}"
-          echo "v${{ steps.semver_parser.outputs.patch }}"
-          echo "v${{ steps.semver_parser.outputs.prerelease }}"
-          echo "v${{ steps.semver_parser.outputs.build }}"
-          echo "v${{ steps.semver_parser.outputs.fullversion }}"
+        echo "Current version: ${{ steps.semver.outputs.current_version  }}"
+        echo "Next version: ${{ steps.semver.outputs.next_version }}"
