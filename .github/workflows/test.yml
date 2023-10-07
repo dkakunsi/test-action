@@ -19,10 +19,15 @@ jobs:
       id: semver
       with:
         bump_level: "minor"
+    - name: Get Date Time
+      id: datetime
+      uses: Kaven-Universe/github-action-current-date-time@v1
+      with:
+        format: "YYYYMMDDHHmmss"
     - name: Set Version
       uses: allenevans/set-env@v2.0.0
       with:
-        VERSION_NUMBER: ${{ steps.semver.outputs.next_version }}-${{ date +'%Y%m%d%H%M%S' }}-SNAPSHOT
+        VERSION_NUMBER: ${{ steps.semver.outputs.next_version }}-${{ steps.datetime.outputs.time }}-SNAPSHOT
     - name: Print current and next version
       run: |
         echo "Current version: ${{ steps.semver.outputs.current_version  }}"
