@@ -19,12 +19,10 @@ jobs:
       id: semver
       with:
         bump_level: "minor"
-    - id: commit
-      uses: prompt/actions-commit-hash@v3
     - name: Set Version
       uses: allenevans/set-env@v2.0.0
       with:
-        VERSION_NUMBER: ${{ steps.semver.outputs.next_version }}-${{ steps.commit.outputs.short }}-SNAPSHOT
+        VERSION_NUMBER: ${{ steps.semver.outputs.next_version }}-$(date +'%Y%m%d%H%M%S')-SNAPSHOT
     - name: Print current and next version
       run: |
         echo "Current version: ${{ steps.semver.outputs.current_version  }}"
