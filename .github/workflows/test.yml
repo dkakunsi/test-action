@@ -10,6 +10,9 @@ jobs:
   revision:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Get Tagged Version
         id: latest_tag
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
@@ -22,9 +25,6 @@ jobs:
     needs: revision
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
     - name: Print current and next version
       run: |
         echo "Revision: ${{ needs.revision.outputs.number }}"
