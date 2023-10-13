@@ -34,10 +34,12 @@ jobs:
     - name: Print event context
       run: |
         echo "Github context: ${{ toJson(github) }}"
-    - name: Print reference type
+    - name: Print reference type branch
+      if: ${{ github.ref_type }} == 'branch'
       run: |
         echo "Event name: ${{ github.ref_type }}"
-    - name: Print event name
+    - name: Print event name type branch
+      if: github.ref_type == 'branch'
       run: |
         echo "Event name: ${{ github.event_name }}"
 
