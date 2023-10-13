@@ -55,15 +55,10 @@ jobs:
       - name: Load PR cache
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository
+          path: ~/
           key: ${{ env.CACHE_PREFIX }}${{ github.run_id }}
           restore-keys: |
             ${{ env.CACHE_PREFIX }}
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: mscore-artifacts
-          path: ~/.m2/repository/com/devit/mscore/
       - name: Clear old cache
         uses: actions/github-script@v6
         with:
@@ -86,5 +81,5 @@ jobs:
       - name: Create new PR cache
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository
+          path: ~/
           key: ${{ env.CACHE_PREFIX }}${{ github.run_id }}
