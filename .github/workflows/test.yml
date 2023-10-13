@@ -33,7 +33,7 @@ jobs:
         echo "Revision: ${{ needs.revision.outputs.number }}"
     - name: Print event context
       run: |
-        echo "Github context: ${{ toJson(github.event) }}"
+        echo "Github context: ${{ toJson(github) }}"
     - name: Print event name
       run: |
         echo "Event name: ${{ github.event_name }}"
