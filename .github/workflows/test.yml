@@ -67,7 +67,7 @@ jobs:
             const caches = await github.rest.actions.getActionsCacheList({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              key: $CACHE_PREFIX
+              key: 'mscore-pr-maven-'
             })
             for (const cache of caches.data.actions_caches) {
               console.log(cache)
