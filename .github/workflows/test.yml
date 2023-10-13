@@ -25,7 +25,13 @@ jobs:
     needs: revision
     runs-on: ubuntu-latest
     steps:
-    - name: Print current and next version
+    - name: Print version
       run: |
         echo "Revision: ${{ needs.revision.outputs.number }}"
+    - name: Print event context
+      run: |
+        echo "Revision: ${{ github.event }}"
+    - name: Print event name
+      run: |
+        echo "Revision: ${{ github.event_name }}"
 
