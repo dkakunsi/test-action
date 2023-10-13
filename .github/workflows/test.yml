@@ -34,6 +34,9 @@ jobs:
     - name: Print event context
       run: |
         echo "Github context: ${{ toJson(github) }}"
+    - name: Print reference type
+      run: |
+        echo "Event name: ${{ github.ref_type }}"
     - name: Print event name
       run: |
         echo "Event name: ${{ github.event_name }}"
