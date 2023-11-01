@@ -27,11 +27,12 @@ jobs:
       - name: Print docker
         run: |
           docker info
-      - name: pwd
+      - name: run
         run: |
           pwd
           ls -a
           cd .github/workflows
+          pwd
       - name: pwd
         run: pwd
     outputs:
