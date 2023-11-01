@@ -52,6 +52,7 @@ jobs:
       run: |
         pwd
         ls -a
+        ls .. -a
         cd .github/workflows
     - name: pwd
       run: pwd
