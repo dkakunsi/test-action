@@ -24,6 +24,16 @@ jobs:
         uses: "WyriHaximus/github-action-get-previous-tag@v1"
         with:
           fallback: 1.0.0
+      - name: Print docker
+        run: |
+          docker info
+      - name: pwd
+        run: |
+          pwd
+          ls -a
+          cd .github/workflows
+      - name: pwd
+        run: pwd
     outputs:
       number: '[${{ steps.latest_tag.outputs.tag }},)'
 
@@ -45,15 +55,3 @@ jobs:
       if: github.ref_type == 'tag'
       run: |
         echo "Event name: ${{ github.event_name }}"
-    - name: Print docker
-      run: |
-        docker info
-    - name: pwd
-      run: |
-        pwd
-        ls -a
-        ls .. -a
-        cd .github/workflows
-    - name: pwd
-      run: pwd
-
