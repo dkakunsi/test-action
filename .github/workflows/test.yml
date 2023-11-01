@@ -48,4 +48,8 @@ jobs:
     - name: Print docker
       run: |
         docker info
+    - name: cd
+      run: cd .github/workflows
+    - name: pwd
+      run: pwd
 
