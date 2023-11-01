@@ -42,17 +42,19 @@ jobs:
     needs: revision
     runs-on: ubuntu-latest
     steps:
-    - name: Print version
-      run: |
-        echo "Revision: ${{ needs.revision.outputs.number }}"
-    - name: Print event context
-      run: |
-        echo "Github context: ${{ toJson(github) }}"
-    - name: Print reference type branch
-      if: ${{ github.ref_type }} == 'branch'
-      run: |
-        echo "Event name: ${{ github.ref_type }}"
-    - name: Print event name type branch
-      if: github.ref_type == 'tag'
-      run: |
-        echo "Event name: ${{ github.event_name }}"
+      - name: Print version
+        run: |
+          echo "Revision: ${{ needs.revision.outputs.number }}"
+      - name: Print event context
+        run: |
+          echo "Github context: ${{ toJson(github) }}"
+      - name: Print reference type branch
+        if: ${{ github.ref_type }} == 'branch'
+        run: |
+          echo "Event name: ${{ github.ref_type }}"
+      - name: Print event name type branch
+        if: github.ref_type == 'tag'
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+      - name: ls docker
+        run: ls /var/lib/docker
